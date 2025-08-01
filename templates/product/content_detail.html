@@ -4,80 +4,108 @@
 <style>
   .product-wrapper {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
+    justify-content: center;
     align-items: flex-start;
   }
   .image-section {
-    width: 300px;
+    flex: 1 1 320px;
+    max-width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .product-image {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    margin-bottom: 0.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    object-fit: cover;
+    max-height: 400px;
   }
   .product-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 800;
     color: #2c3e50;
     text-align: center;
-    margin-bottom: 1.5rem;
   }
-  /* 책 정보 섹션 */
+
   .book-info-section {
-    flex: 1;
+    flex: 2 1 500px;
+    max-width: 700px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 중앙 정렬 */
-    width: 100%;
+    justify-content: flex-start;
+    padding: 0 1rem;
   }
   .product-content {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #555;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #444;
     margin-bottom: 2rem;
-    width: 100%;
-    max-width: 700px;
   }
   .price-tag {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #e74c3c;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
   .btn-buy {
     background-color: #27ae60;
     border: none;
-    margin-bottom: 2rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
   }
   .btn-buy:hover {
     background-color: #219150;
   }
+
   /* 댓글 섹션 */
   .comments-section {
     background: #f9f9f9;
-    padding: 1.5rem;
-    border-radius: 8px;
+    padding: 2rem 2.5rem;
+    border-radius: 15px;
     margin-top: 4rem;
     width: 100%;
-    max-width: 1100px;      /* 최대 너비 확장 */
-    margin-left: auto;      /* 좌우 중앙 정렬 */
+    max-width: 1100px;
+    margin-left: auto;
     margin-right: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 내부 중앙 정렬 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   }
-  .comments-section form,
+  .comments-section h4 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+  .comments-section form textarea {
+    resize: vertical;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  .comments-section form textarea:focus {
+    border-color: #0d6efd;
+    outline: none;
+    box-shadow: 0 0 5px rgba(13,110,253,0.5);
+  }
+  .comments-section form button {
+    border-radius: 50px;
+    padding: 0.5rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+  }
   .comments-list {
-    width: 100%;
-    max-width: 1050px;      /* 내부 최대 너비 확대 */
+    margin-top: 2rem;
   }
   .comment-author {
-    font-weight: 600;
+    font-weight: 700;
     color: #34495e;
   }
   .comment-date {
@@ -85,60 +113,87 @@
     color: #999;
   }
   .comment-content {
-    margin-top: 0.3rem;
+    margin-top: 0.4rem;
     color: #444;
+    white-space: pre-wrap;
   }
   .comment-actions a {
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    margin-left: 0.7rem;
+  }
+  .comment-actions a.btn {
+    padding: 0.25rem 0.6rem;
+  }
+  hr {
+    margin: 1rem 0;
+    border-color: #eee;
+  }
+
+  @media (max-width: 768px) {
+    .product-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-info-section {
+      max-width: 100%;
+      padding: 0;
+    }
+    .image-section {
+      max-width: 100%;
+      width: 100%;
+    }
+    .product-image {
+      max-height: 300px;
+    }
   }
 </style>
 
-<div class="container py-4">
+<div class="container py-5">
   <div class="product-wrapper">
     <div class="image-section">
       {% if content_list.image %}
       <img src="{{ content_list.image.url }}" alt="{{ content_list.title }}" class="product-image" />
+      {% else %}
+      <img src="https://dummyimage.com/350x400/dee2e6/6c757d.jpg" alt="기본 이미지" class="product-image" />
       {% endif %}
       <h2 class="product-title">{{ content_list.title }}</h2>
     </div>
 
-    <!-- 책 정보 섹션 -->
     <div class="book-info-section">
       <div class="product-content">
         {{ content_list.content|linebreaks }}
       </div>
-
       {% if content_list.price %}
       <div class="price-tag">₩ {{ content_list.price|intcomma }}</div>
+      <button class="btn btn-buy">구매하기</button>
       {% endif %}
     </div>
   </div>
 
-  <!-- 댓글 섹션 별도 분리 -->
   <section class="comments-section">
     <h4>댓글</h4>
 
-    <form method="post" action="{% url 'comment_create' content_list.id %}" class="mb-4">
+    <form method="post" action="{% url 'comment_create' content_list.id %}">
       {% csrf_token %}
-      <textarea id="content" name="content" class="form-control mb-2" rows="3" placeholder="내용을 입력해주세요."></textarea>
+      <textarea id="content" name="content" class="form-control mb-3" rows="4" placeholder="내용을 입력해주세요."></textarea>
       <button type="submit" class="btn btn-primary">등록</button>
     </form>
 
     <div class="comments-list">
       {% for comment in content_list.comment_set.all %}
-      <div class="mb-3">
+      <div class="mb-4">
         <div class="d-flex justify-content-between align-items-center">
           <div class="comment-author">{{ comment.author.username }}</div>
-          <div class="comment-date">{{ comment.create_date }}
+          <div class="comment-date">
+            {{ comment.create_date }}
             {% if comment.modify_date %}
             / 수정: {{ comment.modify_date }}
             {% endif %}
           </div>
         </div>
-        <div class="comment-content">{{ comment.content|linebreaks }}</div>
+        <div class="comment-content">{{ comment.content|linebreaksbr }}</div>
         {% if request.user == comment.author %}
-        <div class="comment-actions mt-1">
+        <div class="comment-actions mt-2">
           <a href="{% url 'comment_update' comment.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
           <a href="{% url 'comment_delete' comment.id %}" class="btn btn-sm btn-outline-secondary">삭제</a>
         </div>
@@ -146,7 +201,7 @@
       </div>
       <hr/>
       {% empty %}
-      <p>아직 댓글이 없습니다.</p>
+      <p class="text-center text-muted">아직 댓글이 없습니다.</p>
       {% endfor %}
     </div>
   </section>

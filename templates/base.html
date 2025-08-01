@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ko">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>BookLog</title>
-        <!-- Favicon-->
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
-    </head>
-
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>BookLog</title>
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <style>
-        html, body {
-        font-family: 'Noto Sans KR', sans-serif;
-        }
+        html, body { font-family: 'Noto Sans KR', sans-serif; }
+
     </style>
-    <body class="d-flex flex-column min-vh-100">
-      {% include "navbar.html" %}
-      {% block content %}
-      {% endblock %}
-      {% include "footer.html" %}
-    </body>
-</html>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  {% include "navbar.html" %}
+
+  <main class="flex-grow-1 d-flex flex-column">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  {% include "footer.html" %}
+</body>
+

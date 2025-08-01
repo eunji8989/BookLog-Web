@@ -1,56 +1,136 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
+  html, body {
+    height: auto;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f0f4ff, #d9e4ff);
+    overflow-x: hidden;
+  }
 
   .main-wrapper {
-    flex-grow: 1; /* base.html flex column의 남은 공간을 채우기 위해 */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    padding: 40px 20px;
+    padding: 60px 20px 100px;
     box-sizing: border-box;
-  }
-
-  .main-wrapper h1 {
-    font-size: 48px;
-    font-weight: 800;
-    color: #2d2d2d;
-    margin-bottom: 24px;
-  }
-
-  .main-wrapper p {
-    font-size: 20px;
-    color: #555;
-    max-width: 700px;
-    line-height: 1.6;
-    margin-bottom: 36px;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .book-icon {
-    font-size: 64px;
-    margin-bottom: 10px;
+    font-size: 72px;
+    margin-bottom: 16px;
     color: #4e6cef;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  h1 {
+    font-size: 56px;
+    font-weight: 900;
+    color: #2a2a2a;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
   }
 
   .tagline {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  body p {
+    font-size: 20px;
+    color: #444;
+    max-width: 700px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .btn-primary {
+    background-color: #4e6cef;
+    color: white;
+    padding: 16px 36px;
+    border-radius: 12px;
+    font-weight: 700;
     font-size: 18px;
-    color: #888;
-    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 60px;
+  }
+
+  .btn-primary:hover {
+    background-color: #3a52b5;
   }
 
   .disabled-button {
     display: inline-block;
-    padding: 14px 28px;
+    padding: 16px 36px;
     background-color: #ccc;
     color: white;
-    border-radius: 10px;
-    font-weight: 600;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 18px;
     text-decoration: none;
     pointer-events: none;
     opacity: 0.6;
+    margin-bottom: 60px;
   }
+
+  .features {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    max-width: 800px;
+  }
+
+  .feature-item {
+    flex: 1 1 220px;
+    background: white;
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgb(78 108 239 / 0.15);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-item:hover {
+    transform: translateY(-10px);
+  }
+
+  .feature-icon {
+    font-size: 48px;
+    color: #4e6cef;
+    margin-bottom: 20px;
+  }
+
+  .feature-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #222;
+  }
+
+  .feature-desc {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+  }
+
 </style>
 
 <div class="main-wrapper">
@@ -61,5 +141,22 @@
     독서 감상을 나누고, 베스트셀러에 대해 이야기 나눠보세요.<br>
     회원 가입 후 자유롭게 댓글을 남기고, 다른 사람들의 의견도 확인할 수 있어요.
   </p>
+  <div class="features">
+    <div class="feature-item">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">자유로운 댓글</div>
+      <div class="feature-desc">책에 대한 나의 생각을 자유롭게 나누고, 다른 사람들과 소통할 수 있습니다.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📚</div>
+      <div class="feature-title">베스트셀러 목록</div>
+      <div class="feature-desc">베스트셀러 리스트로 최신 독서 트렌드를 확인하세요.</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">⭐</div>
+      <div class="feature-title">별점 평가 (추가예정)</div>
+      <div class="feature-desc">읽은 책에 대해 별점을 매기고, 다른 사람들의 평가도 참고할 수 있습니다.</div>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>글을 수정할 수 있습니다.<br><br></h2>
-<section class="mb-5">
-    <div class="card bg-light">
-        <div class="card-body">
-            <form method="post" class="mb-4" action="{% url 'comment_update' comment.id %}">
-                {% csrf_token %}
-                <textarea id="content" name="content" class="form-control" rows="3">{{ form.content.value }}</textarea>
-                <button type="submit" class="btn btn-primary">등록</button>
-            </form>
-        </div>
+<style>
+  .center-vertical-wrapper {
+    height: calc(100vh - 150px); /* 기존보다 50px 더 줄임 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+<div class="container center-vertical-wrapper">
+  <div style="width: 100%; max-width: 900px;">
+    <h2 class="mb-5 text-center">댓글 수정하기</h2>
+    <div class="card bg-light shadow-sm">
+      <div class="card-body">
+        <form method="post" action="{% url 'comment_update' comment.id %}">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="content" class="form-label fw-bold">댓글 내용</label>
+            <textarea id="content" name="content" class="form-control" rows="6" required style="width: 100%;">{{ form.content.value }}</textarea>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary px-4">수정 완료</button>
+          </div>
+        </form>
+      </div>
     </div>
-</section>
+  </div>
+</div>
 {% endblock %}
