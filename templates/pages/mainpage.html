@@ -1,40 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
-  body, html {
-    height: 100%;
-    margin: 0;
-  }
 
   .main-wrapper {
-    height: 100vh;
+    flex-grow: 1; /* base.html flex column의 남은 공간을 채우기 위해 */
     display: flex;
-    justify-content: center;  /* 가로 중앙 */
-    align-items: center;      /* 세로 중앙 */
-    flex-direction: column;   /* 요소를 수직으로 나열 */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
   }
 
   .main-wrapper h1 {
-    font-size: 40px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 48px;
+    font-weight: 800;
+    color: #2d2d2d;
+    margin-bottom: 24px;
   }
 
   .main-wrapper p {
-    font-size: 18px;
+    font-size: 20px;
     color: #555;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 700px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+
+  .book-icon {
+    font-size: 64px;
+    margin-bottom: 10px;
+    color: #4e6cef;
+  }
+
+  .tagline {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .disabled-button {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: #ccc;
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    pointer-events: none;
+    opacity: 0.6;
   }
 </style>
 
 <div class="main-wrapper">
-  <h1>메인 페이지입니다</h1>
+  <div class="book-icon">📖</div>
+  <h1>BookLog</h1>
+  <div class="tagline">책을 사랑하는 사람들의 공간</div>
   <p>
-    저희 회사 홈페이지에 방문해 주셔서 감사합니다.<br>
-    최신 소식, 서비스, 회사 소개 등을 이곳에서 확인하실 수 있습니다.
+    독서 감상을 나누고, 베스트셀러에 대해 이야기 나눠보세요.<br>
+    회원 가입 후 자유롭게 댓글을 남기고, 다른 사람들의 의견도 확인할 수 있어요.
   </p>
 </div>
 {% endblock %}
