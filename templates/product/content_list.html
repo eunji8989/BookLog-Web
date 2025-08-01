@@ -1,15 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    <!-- Page Content-->
     <div class="container px-4 px-lg-4">
-        <!-- Heading Row-->
         {% if content_list %}
             {% for content in content_list %}
-            <div class="row gx-4 gx-lg-5 align-items-center my-4">
-                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
-                <div class="col-lg-5">
+            <div class="row gx-0 align-items-center my-4">
+                <div class="col-lg-3 d-flex justify-content-center align-items-center" style="height: 280px;">
+                    {% if content.image %}
+                    <img class="img-fluid rounded mb-4 mb-lg-0"
+                         src="{{ content.image.url }}"
+                         alt="{{ content.title }}"
+                         style="width: 250px; height: 280px; object-fit: cover;" />
+                    {% else %}
+                    <img class="img-fluid rounded mb-4 mb-lg-0"
+                         src="https://dummyimage.com/250x280/dee2e6/6c757d.jpg"
+                         alt="기본 이미지"
+                         style="width: 250px; height: 280px; object-fit: cover;" />
+                    {% endif %}
+                </div>
+                <div class="col-lg-9 ps-3">
                     <h1 class="font-weight-light">{{ content.title }}</h1>
-                    <p>{{ content.content | truncatewords:30 }}</p>
+                    <p class="fs-5">{{ content.content | truncatewords:30 }}</p>
                     <a class="btn btn-primary" href="{% url 'detail' content.id %}">제품 상세보기</a>
                 </div>
             </div>
